@@ -46374,7 +46374,7 @@
 	 * 
 	 * To output to screen set renderToScreens true
 	 *
-	 * @author alteredq / http://alteredqualia.com/
+	 * @author alteredq / http://alteredqualia.com/s
 	 * @author tentone
 	 * @class SSAOPass
 	 */
@@ -46384,7 +46384,7 @@
 			uniforms: {
 				"tDiffuse":     { value: null },
 				"tDepth":       { value: null },
-				"size":         { value: new THREE.Vector2( 512, 512 ) },
+				"size":         { value: new Vector2( 512, 512 ) },
 				"cameraNear":   { value: 1 },
 				"cameraFar":    { value: 100 },
 				"radius":       { value: 32 },
