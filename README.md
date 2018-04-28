@@ -1,5 +1,5 @@
-three.js
-========
+three.js (Everdawn Build)
+=========================
 
 [![Latest NPM release][npm-badge]][npm-badge-url]
 [![License][license-badge]][license-badge-url]
@@ -8,6 +8,8 @@ three.js
 [![Build Status](https://travis-ci.org/mrdoob/three.js.svg?branch=dev)](https://travis-ci.org/mrdoob/three.js)
 
 #### JavaScript 3D library ####
+
+This is a custom package of threeJS including various tweaks and extras which are not typically included in a standard threeJS build. They may cause marginal performance improvements or degradations depending on what your application is doing.
 
 The aim of the project is to create an easy to use, lightweight, 3D library. The library provides &lt;canvas&gt;, &lt;svg&gt;, CSS3D and WebGL renderers.
 
