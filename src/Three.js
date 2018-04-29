@@ -163,3 +163,5 @@ export { SSAOPass } from './postprocessing/SSAOPass.js';
 export { BloomPass } from './postprocessing/BloomPass.js';
 export { FXAAPass } from './postprocessing/FXAAPass.js';
 export { BokehPass } from './postprocessing/BokehPass.js';
+
+export { Water } from './objects/Water.js';
