@@ -178,8 +178,12 @@ function Water ( geometry, options ) {
 			'	float distance = length(worldToEye);',
 
 			'	vec2 distortion = surfaceNormal.xz * ( 0.001 + 1.0 / distance ) * distortionScale;',
-			'	vec3 reflectionSample = vec3( texture2D( mirrorSampler, mirrorCoord.xy / mirrorCoord.z + distortion ) );',
-
+			'	vec3 reflectionSample = vec3 (0.0);',
+			'	reflectionSample += vec3( texture2D( mirrorSampler, (mirrorCoord.xy / mirrorCoord.z) -0.004 + distortion ) )*0.22;',
+			'	reflectionSample += vec3( texture2D( mirrorSampler, (mirrorCoord.xy / mirrorCoord.z) -0.003 + distortion) )*0.22;',
+			'	reflectionSample += vec3( texture2D( mirrorSampler, (mirrorCoord.xy / mirrorCoord.z) -0.002 + distortion) )*0.22;',
+			'	reflectionSample += vec3( texture2D( mirrorSampler, (mirrorCoord.xy / mirrorCoord.z) -0.001 + (distortion*2.0)) )*0.22;',
+			'	reflectionSample += vec3( texture2D( mirrorSampler, (mirrorCoord.xy / mirrorCoord.z) + distortion) )*0.22;',
 			'	float theta = max( dot( eyeDirection, surfaceNormal ), 0.0 );',
 			'	float rf0 = 0.3;',
 			'	float reflectance = rf0 + ( 1.0 - rf0 ) * pow( ( 1.0 - theta ), 5.0 );',
