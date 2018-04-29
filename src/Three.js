@@ -167,3 +167,4 @@ export { BokehPass } from './postprocessing/BokehPass.js';
 export { Water } from './objects/Water.js';
 
 export { OBJLoader } from './loaders/OBJLoader';
+export { MTLLoader } from './loaders/MTLLoader';

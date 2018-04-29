@@ -47223,17 +47223,6 @@ function Water ( geometry, options ) {
 			'	specularColor += pow( direction, shiny ) * sunColor * spec;',
 			'	diffuseColor += max( dot( sunDirection, surfaceNormal ), 0.0 ) * sunColor * diffuse;',
 			'}',
-			// 'vec3 blur9(sampler2D image, vec2 uv, vec2 resolution, vec2 direction) {',
-			// '	vec3 color = vec3(0.0);',
-			// '	vec2 off1 = vec2(1.3846153846) * direction;',
-			// '	vec2 off2 = vec2(3.2307692308) * direction;',
-			// '	color += texture2D(image, uv) * 0.2270270270;',
-			// '	color += texture2D(image, uv + (off1 / resolution)) * 0.3162162162;',
-			// '	color += texture2D(image, uv - (off1 / resolution)) * 0.3162162162;',
-			// '	color += texture2D(image, uv + (off2 / resolution)) * 0.0702702703;',
-			// '	color += texture2D(image, uv - (off2 / resolution)) * 0.0702702703;',
-			// '	return color;',
-			// '  }',
 
 			ShaderChunk[ 'common' ],
 			ShaderChunk[ 'packing' ],
@@ -47257,22 +47246,12 @@ function Water ( geometry, options ) {
 			'	float distance = length(worldToEye);',
 
 			'	vec2 distortion = surfaceNormal.xz * ( 0.001 + 1.0 / distance ) * distortionScale;',
-			// '	vec3 sum = vec3( 0.0 );',
-			// '	sum += vec3( texture2D( mirrorSampler, mirrorCoord.xy / mirrorCoord.z + distortion ) );',
-			// '	sum += vec3( texture2D( mirrorSampler, mirrorCoord.xy + 0.001 / mirrorCoord.z + distortion ) );',
-			// '	sum += vec3( texture2D( mirrorSampler, mirrorCoord.xy + 0.001 / mirrorCoord.z + distortion ) );',
-			// '	sum += vec3( texture2D( mirrorSampler, mirrorCoord.xy + 0.002 / mirrorCoord.z + distortion ) );',
-			// '	sum += vec3( texture2D( mirrorSampler, mirrorCoord.xy + 0.003 / mirrorCoord.z + distortion ) );',
-			//'	vec3 reflectionSample = blur9( mirrorSampler, mirrorCoord.xy / mirrorCoord.z + distortion, mirrorCoord.xy, vec2(0.0) );',
 			'	vec3 reflectionSample = vec3 (0.0);',
 			'	reflectionSample += vec3( texture2D( mirrorSampler, (mirrorCoord.xy / mirrorCoord.z) -0.004 + distortion ) )*0.22;',
 			'	reflectionSample += vec3( texture2D( mirrorSampler, (mirrorCoord.xy / mirrorCoord.z) -0.003 + distortion) )*0.22;',
 			'	reflectionSample += vec3( texture2D( mirrorSampler, (mirrorCoord.xy / mirrorCoord.z) -0.002 + distortion) )*0.22;',
 			'	reflectionSample += vec3( texture2D( mirrorSampler, (mirrorCoord.xy / mirrorCoord.z) -0.001 + (distortion*2.0)) )*0.22;',
 			'	reflectionSample += vec3( texture2D( mirrorSampler, (mirrorCoord.xy / mirrorCoord.z) + distortion) )*0.22;',
-			// '	reflectionSample += vec3( texture2D( mirrorSampler, (mirrorCoord.xy / mirrorCoord.z)+0.001 ) )*0.1;',
-			// '	reflectionSample += vec3( texture2D( mirrorSampler, (mirrorCoord.xy / mirrorCoord.z)+0.002 ) )*0.1;',
-
 			'	float theta = max( dot( eyeDirection, surfaceNormal ), 0.0 );',
 			'	float rf0 = 0.3;',
 			'	float reflectance = rf0 + ( 1.0 - rf0 ) * pow( ( 1.0 - theta ), 5.0 );',
@@ -48205,4 +48184,563 @@ let OBJLoader = function () {
 
 }();
 
-export { WebGLRenderTargetCube, WebGLRenderTarget, WebGLRenderer, ShaderLib, UniformsLib, UniformsUtils, ShaderChunk, FogExp2, Fog, Scene, Sprite, LOD, SkinnedMesh, Skeleton, Bone, Mesh, LineSegments, LineLoop, Line, Points, Group, VideoTexture, DataTexture, CompressedTexture, CubeTexture, CanvasTexture, DepthTexture, Texture, CompressedTextureLoader, DataTextureLoader, CubeTextureLoader, TextureLoader, ObjectLoader, MaterialLoader, BufferGeometryLoader, DefaultLoadingManager, LoadingManager, JSONLoader, ImageLoader, ImageBitmapLoader, FontLoader, FileLoader, Loader, LoaderUtils, Cache, AudioLoader, SpotLightShadow, SpotLight, PointLight, RectAreaLight, HemisphereLight, DirectionalLightShadow, DirectionalLight, AmbientLight, LightShadow, Light, StereoCamera, PerspectiveCamera, OrthographicCamera, CubeCamera, ArrayCamera, Camera, AudioListener, PositionalAudio, AudioContext, AudioAnalyser, Audio, VectorKeyframeTrack, StringKeyframeTrack, QuaternionKeyframeTrack, NumberKeyframeTrack, ColorKeyframeTrack, BooleanKeyframeTrack, PropertyMixer, PropertyBinding, KeyframeTrack, AnimationUtils, AnimationObjectGroup, AnimationMixer, AnimationClip, Uniform, InstancedBufferGeometry, BufferGeometry, Geometry, InterleavedBufferAttribute, InstancedInterleavedBuffer, InterleavedBuffer, InstancedBufferAttribute, Face3, Object3D, Raycaster, Layers, EventDispatcher, Clock, QuaternionLinearInterpolant, LinearInterpolant, DiscreteInterpolant, CubicInterpolant, Interpolant, Triangle, _Math as Math, Spherical, Cylindrical, Plane, Frustum, Sphere, Ray, Matrix4, Matrix3, Box3, Box2, Line3, Euler, Vector4, Vector3, Vector2, Quaternion, Color, ImmediateRenderObject, VertexNormalsHelper, SpotLightHelper, SkeletonHelper, PointLightHelper, RectAreaLightHelper, HemisphereLightHelper, GridHelper, PolarGridHelper, FaceNormalsHelper, DirectionalLightHelper, CameraHelper, BoxHelper, Box3Helper, PlaneHelper, ArrowHelper, AxesHelper, Shape, Path, ShapePath, Font, CurvePath, Curve, ShapeUtils, WebGLUtils, Pass, EffectComposer, ClearPass, ShaderPass, ClearMaskPass, MaskPass, RenderPass, SSAOPass, BloomPass, FXAAPass, BokehPass, Water, OBJLoader, WireframeGeometry, ParametricGeometry, ParametricBufferGeometry, TetrahedronGeometry, TetrahedronBufferGeometry, OctahedronGeometry, OctahedronBufferGeometry, IcosahedronGeometry, IcosahedronBufferGeometry, DodecahedronGeometry, DodecahedronBufferGeometry, PolyhedronGeometry, PolyhedronBufferGeometry, TubeGeometry, TubeBufferGeometry, TorusKnotGeometry, TorusKnotBufferGeometry, TorusGeometry, TorusBufferGeometry, TextGeometry, TextBufferGeometry, SphereGeometry, SphereBufferGeometry, RingGeometry, RingBufferGeometry, PlaneGeometry, PlaneBufferGeometry, LatheGeometry, LatheBufferGeometry, ShapeGeometry, ShapeBufferGeometry, ExtrudeGeometry, ExtrudeBufferGeometry, EdgesGeometry, ConeGeometry, ConeBufferGeometry, CylinderGeometry, CylinderBufferGeometry, CircleGeometry, CircleBufferGeometry, BoxGeometry, BoxBufferGeometry, ShadowMaterial, SpriteMaterial, RawShaderMaterial, ShaderMaterial, PointsMaterial, MeshPhysicalMaterial, MeshStandardMaterial, MeshPhongMaterial, MeshToonMaterial, MeshNormalMaterial, MeshLambertMaterial, MeshDepthMaterial, MeshDistanceMaterial, MeshBasicMaterial, LineDashedMaterial, LineBasicMaterial, Material, Float64BufferAttribute, Float32BufferAttribute, Uint32BufferAttribute, Int32BufferAttribute, Uint16BufferAttribute, Int16BufferAttribute, Uint8ClampedBufferAttribute, Uint8BufferAttribute, Int8BufferAttribute, BufferAttribute, ArcCurve, CatmullRomCurve3, CubicBezierCurve, CubicBezierCurve3, EllipseCurve, LineCurve, LineCurve3, QuadraticBezierCurve, QuadraticBezierCurve3, SplineCurve, REVISION, MOUSE, CullFaceNone, CullFaceBack, CullFaceFront, CullFaceFrontBack, FrontFaceDirectionCW, FrontFaceDirectionCCW, BasicShadowMap, PCFShadowMap, PCFSoftShadowMap, FrontSide, BackSide, DoubleSide, FlatShading, SmoothShading, NoColors, FaceColors, VertexColors, NoBlending, NormalBlending, AdditiveBlending, SubtractiveBlending, MultiplyBlending, CustomBlending, AddEquation, SubtractEquation, ReverseSubtractEquation, MinEquation, MaxEquation, ZeroFactor, OneFactor, SrcColorFactor, OneMinusSrcColorFactor, SrcAlphaFactor, OneMinusSrcAlphaFactor, DstAlphaFactor, OneMinusDstAlphaFactor, DstColorFactor, OneMinusDstColorFactor, SrcAlphaSaturateFactor, NeverDepth, AlwaysDepth, LessDepth, LessEqualDepth, EqualDepth, GreaterEqualDepth, GreaterDepth, NotEqualDepth, MultiplyOperation, MixOperation, AddOperation, NoToneMapping, LinearToneMapping, ReinhardToneMapping, Uncharted2ToneMapping, CineonToneMapping, UVMapping, CubeReflectionMapping, CubeRefractionMapping, EquirectangularReflectionMapping, EquirectangularRefractionMapping, SphericalReflectionMapping, CubeUVReflectionMapping, CubeUVRefractionMapping, RepeatWrapping, ClampToEdgeWrapping, MirroredRepeatWrapping, NearestFilter, NearestMipMapNearestFilter, NearestMipMapLinearFilter, LinearFilter, LinearMipMapNearestFilter, LinearMipMapLinearFilter, UnsignedByteType, ByteType, ShortType, UnsignedShortType, IntType, UnsignedIntType, FloatType, HalfFloatType, UnsignedShort4444Type, UnsignedShort5551Type, UnsignedShort565Type, UnsignedInt248Type, AlphaFormat, RGBFormat, RGBAFormat, LuminanceFormat, LuminanceAlphaFormat, RGBEFormat, DepthFormat, DepthStencilFormat, RGB_S3TC_DXT1_Format, RGBA_S3TC_DXT1_Format, RGBA_S3TC_DXT3_Format, RGBA_S3TC_DXT5_Format, RGB_PVRTC_4BPPV1_Format, RGB_PVRTC_2BPPV1_Format, RGBA_PVRTC_4BPPV1_Format, RGBA_PVRTC_2BPPV1_Format, RGB_ETC1_Format, RGBA_ASTC_4x4_Format, RGBA_ASTC_5x4_Format, RGBA_ASTC_5x5_Format, RGBA_ASTC_6x5_Format, RGBA_ASTC_6x6_Format, RGBA_ASTC_8x5_Format, RGBA_ASTC_8x6_Format, RGBA_ASTC_8x8_Format, RGBA_ASTC_10x5_Format, RGBA_ASTC_10x6_Format, RGBA_ASTC_10x8_Format, RGBA_ASTC_10x10_Format, RGBA_ASTC_12x10_Format, RGBA_ASTC_12x12_Format, LoopOnce, LoopRepeat, LoopPingPong, InterpolateDiscrete, InterpolateLinear, InterpolateSmooth, ZeroCurvatureEnding, ZeroSlopeEnding, WrapAroundEnding, TrianglesDrawMode, TriangleStripDrawMode, TriangleFanDrawMode, LinearEncoding, sRGBEncoding, GammaEncoding, RGBEEncoding, LogLuvEncoding, RGBM7Encoding, RGBM16Encoding, RGBDEncoding, BasicDepthPacking, RGBADepthPacking, BoxGeometry as CubeGeometry, Face4, LineStrip, LinePieces, MeshFaceMaterial, MultiMaterial, PointCloud, Particle, ParticleSystem, PointCloudMaterial, ParticleBasicMaterial, ParticleSystemMaterial, Vertex, DynamicBufferAttribute, Int8Attribute, Uint8Attribute, Uint8ClampedAttribute, Int16Attribute, Uint16Attribute, Int32Attribute, Uint32Attribute, Float32Attribute, Float64Attribute, ClosedSplineCurve3, SplineCurve3, Spline, AxisHelper, BoundingBoxHelper, EdgesHelper, WireframeHelper, XHRLoader, BinaryTextureLoader, GeometryUtils, ImageUtils, Projector, CanvasRenderer, SceneUtils, LensFlare };
+/**
+ * Loads a Wavefront .mtl file specifying materials
+ *
+ * @author angelxuanchang
+ */
+
+function MTLLoader ( manager ) {
+
+	this.manager = ( manager !== undefined ) ? manager : DefaultLoadingManager;
+
+}
+MTLLoader.prototype = {
+
+	constructor: MTLLoader,
+
+	/**
+	 * Loads and parses a MTL asset from a URL.
+	 *
+	 * @param {String} url - URL to the MTL file.
+	 * @param {Function} [onLoad] - Callback invoked with the loaded object.
+	 * @param {Function} [onProgress] - Callback for download progress.
+	 * @param {Function} [onError] - Callback for download errors.
+	 *
+	 * @see setPath setTexturePath
+	 *
+	 * @note In order for relative texture references to resolve correctly
+	 * you must call setPath and/or setTexturePath explicitly prior to load.
+	 */
+	load: function ( url, onLoad, onProgress, onError ) {
+
+		var scope = this;
+
+		var loader = new FileLoader( this.manager );
+		loader.setPath( this.path );
+		loader.load( url, function ( text ) {
+
+			onLoad( scope.parse( text ) );
+
+		}, onProgress, onError );
+
+	},
+
+	/**
+	 * Set base path for resolving references.
+	 * If set this path will be prepended to each loaded and found reference.
+	 *
+	 * @see setTexturePath
+	 * @param {String} path
+	 * @return {MTLLoader}
+	 *
+	 * @example
+	 *     mtlLoader.setPath( 'assets/obj/' );
+	 *     mtlLoader.load( 'my.mtl', ... );
+	 */
+	setPath: function ( path ) {
+
+		this.path = path;
+		return this;
+
+	},
+
+	/**
+	 * Set base path for resolving texture references.
+	 * If set this path will be prepended found texture reference.
+	 * If not set and setPath is, it will be used as texture base path.
+	 *
+	 * @see setPath
+	 * @param {String} path
+	 * @return {MTLLoader}
+	 *
+	 * @example
+	 *     mtlLoader.setPath( 'assets/obj/' );
+	 *     mtlLoader.setTexturePath( 'assets/textures/' );
+	 *     mtlLoader.load( 'my.mtl', ... );
+	 */
+	setTexturePath: function ( path ) {
+
+		this.texturePath = path;
+		return this;
+
+	},
+
+	setBaseUrl: function ( path ) {
+
+		console.warn( 'MTLLoader: .setBaseUrl() is deprecated. Use .setTexturePath( path ) for texture path or .setPath( path ) for general base path instead.' );
+
+		return this.setTexturePath( path );
+
+	},
+
+	setCrossOrigin: function ( value ) {
+
+		this.crossOrigin = value;
+		return this;
+
+	},
+
+	setMaterialOptions: function ( value ) {
+
+		this.materialOptions = value;
+		return this;
+
+	},
+
+	/**
+	 * Parses a MTL file.
+	 *
+	 * @param {String} text - Content of MTL file
+	 * @return {MTLLoader.MaterialCreator}
+	 *
+	 * @see setPath setTexturePath
+	 *
+	 * @note In order for relative texture references to resolve correctly
+	 * you must call setPath and/or setTexturePath explicitly prior to parse.
+	 */
+	parse: function ( text ) {
+
+		var lines = text.split( '\n' );
+		var info = {};
+		var delimiter_pattern = /\s+/;
+		var materialsInfo = {};
+
+		for ( var i = 0; i < lines.length; i ++ ) {
+
+			var line = lines[ i ];
+			line = line.trim();
+
+			if ( line.length === 0 || line.charAt( 0 ) === '#' ) {
+
+				// Blank line or comment ignore
+				continue;
+
+			}
+
+			var pos = line.indexOf( ' ' );
+
+			var key = ( pos >= 0 ) ? line.substring( 0, pos ) : line;
+			key = key.toLowerCase();
+
+			var value = ( pos >= 0 ) ? line.substring( pos + 1 ) : '';
+			value = value.trim();
+
+			if ( key === 'newmtl' ) {
+
+				// New material
+
+				info = { name: value };
+				materialsInfo[ value ] = info;
+
+			} else if ( info ) {
+
+				if ( key === 'ka' || key === 'kd' || key === 'ks' ) {
+
+					var ss = value.split( delimiter_pattern, 3 );
+					info[ key ] = [ parseFloat( ss[ 0 ] ), parseFloat( ss[ 1 ] ), parseFloat( ss[ 2 ] ) ];
+
+				} else {
+
+					info[ key ] = value;
+
+				}
+
+			}
+
+		}
+
+		var materialCreator = new MTLLoader.MaterialCreator( this.texturePath || this.path, this.materialOptions );
+		materialCreator.setCrossOrigin( this.crossOrigin );
+		materialCreator.setManager( this.manager );
+		materialCreator.setMaterials( materialsInfo );
+		return materialCreator;
+
+	}
+
+};
+
+/**
+ * Create a new THREE-MTLLoader.MaterialCreator
+ * @param baseUrl - Url relative to which textures are loaded
+ * @param options - Set of options on how to construct the materials
+ *                  side: Which side to apply the material
+ *                        FrontSide (default), BackSide, DoubleSide
+ *                  wrap: What type of wrapping to apply for textures
+ *                        RepeatWrapping (default), ClampToEdgeWrapping, MirroredRepeatWrapping
+ *                  normalizeRGB: RGBs need to be normalized to 0-1 from 0-255
+ *                                Default: false, assumed to be already normalized
+ *                  ignoreZeroRGBs: Ignore values of RGBs (Ka,Kd,Ks) that are all 0's
+ *                                  Default: false
+ * @constructor
+ */
+
+MTLLoader.MaterialCreator = function ( baseUrl, options ) {
+
+	this.baseUrl = baseUrl || '';
+	this.options = options;
+	this.materialsInfo = {};
+	this.materials = {};
+	this.materialsArray = [];
+	this.nameLookup = {};
+
+	this.side = ( this.options && this.options.side ) ? this.options.side : FrontSide;
+	this.wrap = ( this.options && this.options.wrap ) ? this.options.wrap : RepeatWrapping;
+
+};
+
+MTLLoader.MaterialCreator.prototype = {
+
+	constructor: MTLLoader.MaterialCreator,
+
+	crossOrigin: 'Anonymous',
+
+	setCrossOrigin: function ( value ) {
+
+		this.crossOrigin = value;
+
+	},
+
+	setManager: function ( value ) {
+
+		this.manager = value;
+
+	},
+
+	setMaterials: function ( materialsInfo ) {
+
+		this.materialsInfo = this.convert( materialsInfo );
+		this.materials = {};
+		this.materialsArray = [];
+		this.nameLookup = {};
+
+	},
+
+	convert: function ( materialsInfo ) {
+
+		if ( ! this.options ) return materialsInfo;
+
+		var converted = {};
+
+		for ( var mn in materialsInfo ) {
+
+			// Convert materials info into normalized form based on options
+
+			var mat = materialsInfo[ mn ];
+
+			var covmat = {};
+
+			converted[ mn ] = covmat;
+
+			for ( var prop in mat ) {
+
+				var save = true;
+				var value = mat[ prop ];
+				var lprop = prop.toLowerCase();
+
+				switch ( lprop ) {
+
+					case 'kd':
+					case 'ka':
+					case 'ks':
+
+						// Diffuse color (color under white light) using RGB values
+
+						if ( this.options && this.options.normalizeRGB ) {
+
+							value = [ value[ 0 ] / 255, value[ 1 ] / 255, value[ 2 ] / 255 ];
+
+						}
+
+						if ( this.options && this.options.ignoreZeroRGBs ) {
+
+							if ( value[ 0 ] === 0 && value[ 1 ] === 0 && value[ 2 ] === 0 ) {
+
+								// ignore
+
+								save = false;
+
+							}
+
+						}
+
+						break;
+
+					default:
+
+						break;
+
+				}
+
+				if ( save ) {
+
+					covmat[ lprop ] = value;
+
+				}
+
+			}
+
+		}
+
+		return converted;
+
+	},
+
+	preload: function () {
+
+		for ( var mn in this.materialsInfo ) {
+
+			this.create( mn );
+
+		}
+
+	},
+
+	getIndex: function ( materialName ) {
+
+		return this.nameLookup[ materialName ];
+
+	},
+
+	getAsArray: function () {
+
+		var index = 0;
+
+		for ( var mn in this.materialsInfo ) {
+
+			this.materialsArray[ index ] = this.create( mn );
+			this.nameLookup[ mn ] = index;
+			index ++;
+
+		}
+
+		return this.materialsArray;
+
+	},
+
+	create: function ( materialName ) {
+
+		if ( this.materials[ materialName ] === undefined ) {
+
+			this.createMaterial_( materialName );
+
+		}
+
+		return this.materials[ materialName ];
+
+	},
+
+	createMaterial_: function ( materialName ) {
+
+		// Create material
+
+		var scope = this;
+		var mat = this.materialsInfo[ materialName ];
+		var params = {
+
+			name: materialName,
+			side: this.side
+
+		};
+
+		function resolveURL( baseUrl, url ) {
+
+			if ( typeof url !== 'string' || url === '' )
+				return '';
+
+			// Absolute URL
+			if ( /^https?:\/\//i.test( url ) ) return url;
+
+			return baseUrl + url;
+
+		}
+
+		function setMapForType( mapType, value ) {
+
+			if ( params[ mapType ] ) return; // Keep the first encountered texture
+
+			var texParams = scope.getTextureParams( value, params );
+			var map = scope.loadTexture( resolveURL( scope.baseUrl, texParams.url ) );
+
+			map.repeat.copy( texParams.scale );
+			map.offset.copy( texParams.offset );
+
+			map.wrapS = scope.wrap;
+			map.wrapT = scope.wrap;
+
+			params[ mapType ] = map;
+
+		}
+
+		for ( var prop in mat ) {
+
+			var value = mat[ prop ];
+			var n;
+
+			if ( value === '' ) continue;
+
+			switch ( prop.toLowerCase() ) {
+
+				// Ns is material specular exponent
+
+				case 'kd':
+
+					// Diffuse color (color under white light) using RGB values
+
+					params.color = new Color().fromArray( value );
+
+					break;
+
+				case 'ks':
+
+					// Specular color (color when light is reflected from shiny surface) using RGB values
+					params.specular = new Color().fromArray( value );
+
+					break;
+
+				case 'map_kd':
+
+					// Diffuse texture map
+
+					setMapForType( "map", value );
+
+					break;
+
+				case 'map_ks':
+
+					// Specular map
+
+					setMapForType( "specularMap", value );
+
+					break;
+
+				case 'norm':
+
+					setMapForType( "normalMap", value );
+
+					break;
+
+				case 'map_bump':
+				case 'bump':
+
+					// Bump texture map
+
+					setMapForType( "bumpMap", value );
+
+					break;
+
+				case 'ns':
+
+					// The specular exponent (defines the focus of the specular highlight)
+					// A high exponent results in a tight, concentrated highlight. Ns values normally range from 0 to 1000.
+
+					params.shininess = parseFloat( value );
+
+					break;
+
+				case 'd':
+					n = parseFloat( value );
+
+					if ( n < 1 ) {
+
+						params.opacity = n;
+						params.transparent = true;
+
+					}
+
+					break;
+
+				case 'tr':
+					n = parseFloat( value );
+
+					if ( this.options && this.options.invertTrProperty ) n = 1 - n;
+
+					if ( n > 0 ) {
+
+						params.opacity = 1 - n;
+						params.transparent = true;
+
+					}
+
+					break;
+
+				default:
+					break;
+
+			}
+
+		}
+
+		this.materials[ materialName ] = new MeshPhongMaterial( params );
+		return this.materials[ materialName ];
+
+	},
+
+	getTextureParams: function ( value, matParams ) {
+
+		var texParams = {
+
+			scale: new Vector2( 1, 1 ),
+			offset: new Vector2( 0, 0 )
+
+		 };
+
+		var items = value.split( /\s+/ );
+		var pos;
+
+		pos = items.indexOf( '-bm' );
+
+		if ( pos >= 0 ) {
+
+			matParams.bumpScale = parseFloat( items[ pos + 1 ] );
+			items.splice( pos, 2 );
+
+		}
+
+		pos = items.indexOf( '-s' );
+
+		if ( pos >= 0 ) {
+
+			texParams.scale.set( parseFloat( items[ pos + 1 ] ), parseFloat( items[ pos + 2 ] ) );
+			items.splice( pos, 4 ); // we expect 3 parameters here!
+
+		}
+
+		pos = items.indexOf( '-o' );
+
+		if ( pos >= 0 ) {
+
+			texParams.offset.set( parseFloat( items[ pos + 1 ] ), parseFloat( items[ pos + 2 ] ) );
+			items.splice( pos, 4 ); // we expect 3 parameters here!
+
+		}
+
+		texParams.url = items.join( ' ' ).trim();
+		return texParams;
+
+	},
+
+	loadTexture: function ( url, mapping, onLoad, onProgress, onError ) {
+
+		var texture;
+		var loader = Loader.Handlers.get( url );
+		var manager = ( this.manager !== undefined ) ? this.manager : DefaultLoadingManager;
+
+		if ( loader === null ) {
+
+			loader = new TextureLoader( manager );
+
+		}
+
+		if ( loader.setCrossOrigin ) loader.setCrossOrigin( this.crossOrigin );
+		texture = loader.load( url, onLoad, onProgress, onError );
+
+		if ( mapping !== undefined ) texture.mapping = mapping;
+
+		return texture;
+
+	}
+
+};
+
+export { WebGLRenderTargetCube, WebGLRenderTarget, WebGLRenderer, ShaderLib, UniformsLib, UniformsUtils, ShaderChunk, FogExp2, Fog, Scene, Sprite, LOD, SkinnedMesh, Skeleton, Bone, Mesh, LineSegments, LineLoop, Line, Points, Group, VideoTexture, DataTexture, CompressedTexture, CubeTexture, CanvasTexture, DepthTexture, Texture, CompressedTextureLoader, DataTextureLoader, CubeTextureLoader, TextureLoader, ObjectLoader, MaterialLoader, BufferGeometryLoader, DefaultLoadingManager, LoadingManager, JSONLoader, ImageLoader, ImageBitmapLoader, FontLoader, FileLoader, Loader, LoaderUtils, Cache, AudioLoader, SpotLightShadow, SpotLight, PointLight, RectAreaLight, HemisphereLight, DirectionalLightShadow, DirectionalLight, AmbientLight, LightShadow, Light, StereoCamera, PerspectiveCamera, OrthographicCamera, CubeCamera, ArrayCamera, Camera, AudioListener, PositionalAudio, AudioContext, AudioAnalyser, Audio, VectorKeyframeTrack, StringKeyframeTrack, QuaternionKeyframeTrack, NumberKeyframeTrack, ColorKeyframeTrack, BooleanKeyframeTrack, PropertyMixer, PropertyBinding, KeyframeTrack, AnimationUtils, AnimationObjectGroup, AnimationMixer, AnimationClip, Uniform, InstancedBufferGeometry, BufferGeometry, Geometry, InterleavedBufferAttribute, InstancedInterleavedBuffer, InterleavedBuffer, InstancedBufferAttribute, Face3, Object3D, Raycaster, Layers, EventDispatcher, Clock, QuaternionLinearInterpolant, LinearInterpolant, DiscreteInterpolant, CubicInterpolant, Interpolant, Triangle, _Math as Math, Spherical, Cylindrical, Plane, Frustum, Sphere, Ray, Matrix4, Matrix3, Box3, Box2, Line3, Euler, Vector4, Vector3, Vector2, Quaternion, Color, ImmediateRenderObject, VertexNormalsHelper, SpotLightHelper, SkeletonHelper, PointLightHelper, RectAreaLightHelper, HemisphereLightHelper, GridHelper, PolarGridHelper, FaceNormalsHelper, DirectionalLightHelper, CameraHelper, BoxHelper, Box3Helper, PlaneHelper, ArrowHelper, AxesHelper, Shape, Path, ShapePath, Font, CurvePath, Curve, ShapeUtils, WebGLUtils, Pass, EffectComposer, ClearPass, ShaderPass, ClearMaskPass, MaskPass, RenderPass, SSAOPass, BloomPass, FXAAPass, BokehPass, Water, OBJLoader, MTLLoader, WireframeGeometry, ParametricGeometry, ParametricBufferGeometry, TetrahedronGeometry, TetrahedronBufferGeometry, OctahedronGeometry, OctahedronBufferGeometry, IcosahedronGeometry, IcosahedronBufferGeometry, DodecahedronGeometry, DodecahedronBufferGeometry, PolyhedronGeometry, PolyhedronBufferGeometry, TubeGeometry, TubeBufferGeometry, TorusKnotGeometry, TorusKnotBufferGeometry, TorusGeometry, TorusBufferGeometry, TextGeometry, TextBufferGeometry, SphereGeometry, SphereBufferGeometry, RingGeometry, RingBufferGeometry, PlaneGeometry, PlaneBufferGeometry, LatheGeometry, LatheBufferGeometry, ShapeGeometry, ShapeBufferGeometry, ExtrudeGeometry, ExtrudeBufferGeometry, EdgesGeometry, ConeGeometry, ConeBufferGeometry, CylinderGeometry, CylinderBufferGeometry, CircleGeometry, CircleBufferGeometry, BoxGeometry, BoxBufferGeometry, ShadowMaterial, SpriteMaterial, RawShaderMaterial, ShaderMaterial, PointsMaterial, MeshPhysicalMaterial, MeshStandardMaterial, MeshPhongMaterial, MeshToonMaterial, MeshNormalMaterial, MeshLambertMaterial, MeshDepthMaterial, MeshDistanceMaterial, MeshBasicMaterial, LineDashedMaterial, LineBasicMaterial, Material, Float64BufferAttribute, Float32BufferAttribute, Uint32BufferAttribute, Int32BufferAttribute, Uint16BufferAttribute, Int16BufferAttribute, Uint8ClampedBufferAttribute, Uint8BufferAttribute, Int8BufferAttribute, BufferAttribute, ArcCurve, CatmullRomCurve3, CubicBezierCurve, CubicBezierCurve3, EllipseCurve, LineCurve, LineCurve3, QuadraticBezierCurve, QuadraticBezierCurve3, SplineCurve, REVISION, MOUSE, CullFaceNone, CullFaceBack, CullFaceFront, CullFaceFrontBack, FrontFaceDirectionCW, FrontFaceDirectionCCW, BasicShadowMap, PCFShadowMap, PCFSoftShadowMap, FrontSide, BackSide, DoubleSide, FlatShading, SmoothShading, NoColors, FaceColors, VertexColors, NoBlending, NormalBlending, AdditiveBlending, SubtractiveBlending, MultiplyBlending, CustomBlending, AddEquation, SubtractEquation, ReverseSubtractEquation, MinEquation, MaxEquation, ZeroFactor, OneFactor, SrcColorFactor, OneMinusSrcColorFactor, SrcAlphaFactor, OneMinusSrcAlphaFactor, DstAlphaFactor, OneMinusDstAlphaFactor, DstColorFactor, OneMinusDstColorFactor, SrcAlphaSaturateFactor, NeverDepth, AlwaysDepth, LessDepth, LessEqualDepth, EqualDepth, GreaterEqualDepth, GreaterDepth, NotEqualDepth, MultiplyOperation, MixOperation, AddOperation, NoToneMapping, LinearToneMapping, ReinhardToneMapping, Uncharted2ToneMapping, CineonToneMapping, UVMapping, CubeReflectionMapping, CubeRefractionMapping, EquirectangularReflectionMapping, EquirectangularRefractionMapping, SphericalReflectionMapping, CubeUVReflectionMapping, CubeUVRefractionMapping, RepeatWrapping, ClampToEdgeWrapping, MirroredRepeatWrapping, NearestFilter, NearestMipMapNearestFilter, NearestMipMapLinearFilter, LinearFilter, LinearMipMapNearestFilter, LinearMipMapLinearFilter, UnsignedByteType, ByteType, ShortType, UnsignedShortType, IntType, UnsignedIntType, FloatType, HalfFloatType, UnsignedShort4444Type, UnsignedShort5551Type, UnsignedShort565Type, UnsignedInt248Type, AlphaFormat, RGBFormat, RGBAFormat, LuminanceFormat, LuminanceAlphaFormat, RGBEFormat, DepthFormat, DepthStencilFormat, RGB_S3TC_DXT1_Format, RGBA_S3TC_DXT1_Format, RGBA_S3TC_DXT3_Format, RGBA_S3TC_DXT5_Format, RGB_PVRTC_4BPPV1_Format, RGB_PVRTC_2BPPV1_Format, RGBA_PVRTC_4BPPV1_Format, RGBA_PVRTC_2BPPV1_Format, RGB_ETC1_Format, RGBA_ASTC_4x4_Format, RGBA_ASTC_5x4_Format, RGBA_ASTC_5x5_Format, RGBA_ASTC_6x5_Format, RGBA_ASTC_6x6_Format, RGBA_ASTC_8x5_Format, RGBA_ASTC_8x6_Format, RGBA_ASTC_8x8_Format, RGBA_ASTC_10x5_Format, RGBA_ASTC_10x6_Format, RGBA_ASTC_10x8_Format, RGBA_ASTC_10x10_Format, RGBA_ASTC_12x10_Format, RGBA_ASTC_12x12_Format, LoopOnce, LoopRepeat, LoopPingPong, InterpolateDiscrete, InterpolateLinear, InterpolateSmooth, ZeroCurvatureEnding, ZeroSlopeEnding, WrapAroundEnding, TrianglesDrawMode, TriangleStripDrawMode, TriangleFanDrawMode, LinearEncoding, sRGBEncoding, GammaEncoding, RGBEEncoding, LogLuvEncoding, RGBM7Encoding, RGBM16Encoding, RGBDEncoding, BasicDepthPacking, RGBADepthPacking, BoxGeometry as CubeGeometry, Face4, LineStrip, LinePieces, MeshFaceMaterial, MultiMaterial, PointCloud, Particle, ParticleSystem, PointCloudMaterial, ParticleBasicMaterial, ParticleSystemMaterial, Vertex, DynamicBufferAttribute, Int8Attribute, Uint8Attribute, Uint8ClampedAttribute, Int16Attribute, Uint16Attribute, Int32Attribute, Uint32Attribute, Float32Attribute, Float64Attribute, ClosedSplineCurve3, SplineCurve3, Spline, AxisHelper, BoundingBoxHelper, EdgesHelper, WireframeHelper, XHRLoader, BinaryTextureLoader, GeometryUtils, ImageUtils, Projector, CanvasRenderer, SceneUtils, LensFlare };
