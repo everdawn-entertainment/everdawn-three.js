@@ -104,6 +104,8 @@ Object.assign( EffectComposer.prototype, {
 
 					this.copyPass.render( this.renderer, this.writeBuffer, this.readBuffer, delta );
 
+					this.info = this.copyPass.info;
+
 					context.stencilFunc( context.EQUAL, 1, 0xffffffff );
 
 				}

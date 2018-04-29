@@ -21,7 +21,7 @@ function FXAAPass ( w, h, textureID ) {
 	this.textureID = ( textureID !== undefined ) ? textureID : "tDiffuse";
     this.uniforms = UniformsUtils.clone({
         "tDiffuse":   { value: null },
-        "resolution": { value: new THREE.Vector2( 1 / w, 1 / h ) }
+        "resolution": { value: new Vector2( 1 / w, 1 / h ) }
     });
 	this.material = new ShaderMaterial( {
         uniforms: this.uniforms,

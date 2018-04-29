@@ -1,7 +1,7 @@
 import { ShaderPass } from './ShaderPass.js';
 import { MeshDepthMaterial } from '../materials/MeshDepthMaterial';
 import { WebGLRenderTarget } from '../renderers/WebGLRenderTarget';
-import { RGBADepthPacking, NoBlending, LinearFilter, RGBAFormat, AdditiveBlending } from '../constants';
+import { RGBADepthPacking, NoBlending, LinearFilter, RGBAFormat, AdditiveBlending, RGBFormat } from '../constants';
 import { CustomShaders } from '../renderers/shaders/CustomLib';
 import { UniformsUtils } from '../renderers/shaders/UniformsUtils.js';
 import { Pass } from './Pass.js';
@@ -54,13 +54,6 @@ function BokehPass ( scene, camera, params ) {
 
 	// bokeh material
 
-	if ( BokehShader === undefined ) {
-
-		console.error( "BokehPass relies on BokehShader" );
-
-	}
-
-	var bokehShader = BokehShader;
 	var bokehUniforms = UniformsUtils.clone( {
 
 		"tColor":   { value: null },

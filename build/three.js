@@ -272,7 +272,7 @@
 	var UnsignedShort565Type = 1019;
 	var UnsignedInt248Type = 1020;
 	var AlphaFormat = 1021;
-	var RGBFormat$1 = 1022;
+	var RGBFormat = 1022;
 	var RGBAFormat = 1023;
 	var LuminanceFormat = 1024;
 	var LuminanceAlphaFormat = 1025;
@@ -19961,7 +19961,7 @@
 
 								mipmap = mipmaps[ j ];
 
-								if ( texture.format !== RGBAFormat && texture.format !== RGBFormat$1 ) {
+								if ( texture.format !== RGBAFormat && texture.format !== RGBFormat ) {
 
 									if ( state.getCompressedTextureFormats().indexOf( glFormat ) > - 1 ) {
 
@@ -20200,7 +20200,7 @@
 
 					mipmap = mipmaps[ i ];
 
-					if ( texture.format !== RGBAFormat && texture.format !== RGBFormat$1 ) {
+					if ( texture.format !== RGBAFormat && texture.format !== RGBFormat ) {
 
 						if ( state.getCompressedTextureFormats().indexOf( glFormat ) > - 1 ) {
 
@@ -20554,7 +20554,7 @@
 			}
 
 			if ( p === AlphaFormat ) return gl.ALPHA;
-			if ( p === RGBFormat$1 ) return gl.RGB;
+			if ( p === RGBFormat ) return gl.RGB;
 			if ( p === RGBAFormat ) return gl.RGBA;
 			if ( p === LuminanceFormat ) return gl.LUMINANCE;
 			if ( p === LuminanceAlphaFormat ) return gl.LUMINANCE_ALPHA;
@@ -31303,7 +31303,7 @@
 				// JPEGs can't have an alpha channel, so memory can be saved by storing them as RGB.
 				var isJPEG = url.search( /\.(jpg|jpeg)$/ ) > 0 || url.search( /^data\:image\/jpeg/ ) === 0;
 
-				texture.format = isJPEG ? RGBFormat$1 : RGBAFormat;
+				texture.format = isJPEG ? RGBFormat : RGBAFormat;
 				texture.needsUpdate = true;
 
 				if ( onLoad !== undefined ) {
@@ -38299,7 +38299,7 @@
 		cameraNZ.lookAt( new Vector3( 0, 0, - 1 ) );
 		this.add( cameraNZ );
 
-		var options = { format: RGBFormat$1, magFilter: LinearFilter, minFilter: LinearFilter };
+		var options = { format: RGBFormat, magFilter: LinearFilter, minFilter: LinearFilter };
 
 		this.renderTarget = new WebGLRenderTargetCube( cubeResolution, cubeResolution, options );
 		this.renderTarget.texture.name = "CubeCamera";
@@ -46190,6 +46190,8 @@
 
 						this.copyPass.render( this.renderer, this.writeBuffer, this.readBuffer, delta );
 
+						this.info = this.copyPass.info;
+
 						context.stencilFunc( context.EQUAL, 1, 0xffffffff );
 
 					}
@@ -46346,7 +46348,6 @@
 			}
 
 			renderer.render( this.scene, this.camera, this.renderToScreen ? null : readBuffer, this.clear );
-
 			if ( this.clearColor ) {
 
 				renderer.setClearColor( oldClearColor, oldClearAlpha );
@@ -46909,7 +46910,7 @@
 		this.textureID = ( textureID !== undefined ) ? textureID : "tDiffuse";
 	    this.uniforms = UniformsUtils.clone({
 	        "tDiffuse":   { value: null },
-	        "resolution": { value: new THREE.Vector2( 1 / w, 1 / h ) }
+	        "resolution": { value: new Vector2( 1 / w, 1 / h ) }
 	    });
 		this.material = new ShaderMaterial( {
 	        uniforms: this.uniforms,
@@ -46993,11 +46994,6 @@
 
 		// bokeh material
 
-		if ( BokehShader === undefined ) {
-
-			console.error( "BokehPass relies on BokehShader" );
-
-		}
 		var bokehUniforms = UniformsUtils.clone( {
 
 			"tColor":   { value: null },
@@ -47410,7 +47406,7 @@
 	exports.UnsignedShort565Type = UnsignedShort565Type;
 	exports.UnsignedInt248Type = UnsignedInt248Type;
 	exports.AlphaFormat = AlphaFormat;
-	exports.RGBFormat = RGBFormat$1;
+	exports.RGBFormat = RGBFormat;
 	exports.RGBAFormat = RGBAFormat;
 	exports.LuminanceFormat = LuminanceFormat;
 	exports.LuminanceAlphaFormat = LuminanceAlphaFormat;

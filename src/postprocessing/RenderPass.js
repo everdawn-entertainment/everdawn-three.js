@@ -50,7 +50,6 @@ RenderPass.prototype = Object.assign( Object.create( Pass.prototype ), {
 		}
 
 		renderer.render( this.scene, this.camera, this.renderToScreen ? null : readBuffer, this.clear );
-
 		if ( this.clearColor ) {
 
 			renderer.setClearColor( oldClearColor, oldClearAlpha );
