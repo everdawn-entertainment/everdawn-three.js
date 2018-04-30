@@ -168,3 +168,4 @@ export { Water } from './objects/Water.js';
 
 export { OBJLoader } from './loaders/OBJLoader';
 export { MTLLoader } from './loaders/MTLLoader';
+export { FBXLoader } from './loaders/FBXLoader';
